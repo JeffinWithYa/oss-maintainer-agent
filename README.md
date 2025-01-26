@@ -111,6 +111,14 @@ For local development, we recommend using [docker compose watch](https://docs.do
 
    ```sh
    docker compose watch
+
+   ex API request body:
+   {
+    "topic": "Latest developments in artificial intelligence",
+    "model": "gpt-4o-mini",
+    "thread_id": "optional-thread-id",
+    "max_iterations": 3
+   }
    ```
 
 3. The services will now automatically update when you make changes to your code:
