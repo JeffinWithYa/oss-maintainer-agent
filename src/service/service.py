@@ -27,6 +27,7 @@ from schema import (
     ServiceMetadata,
     StreamInput,
     UserInput,
+    ResearchReportRequest,
 )
 from service.utils import (
     convert_message_content_to_string,
@@ -261,6 +262,34 @@ def history(input: ChatHistoryInput) -> ChatHistory:
     except Exception as e:
         logger.error(f"An exception occurred: {e}")
         raise HTTPException(status_code=500, detail="Unexpected error")
+
+
+@router.post("/research")
+async def generate_research_report(request: ResearchReportRequest) -> ChatMessage:
+    """
+    Generate a detailed research report on a given topic.
+    
+    This endpoint uses the research assistant agent with web search capabilities
+    to create a comprehensive report on the requested topic.
+    """
+    # Create a research-specific prompt
+    research_prompt = (
+        "Please create a detailed research report on the following topic. "
+        "Use web searches to gather accurate and up-to-date information. "
+        "Format the response in markdown with clear sections and citations. "
+        f"Topic: {request.topic}"
+    )
+    
+    # Convert to UserInput format
+    user_input = UserInput(
+        message=research_prompt,
+        thread_id=request.thread_id,
+        model=request.model,
+        agent_config={"max_iterations": request.max_iterations}
+    )
+    
+    # Use the research assistant agent specifically
+    return await invoke(user_input, agent_id="research-assistant")
 
 
 @app.get("/health")

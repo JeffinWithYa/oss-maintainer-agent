@@ -168,3 +168,23 @@ class ChatHistoryInput(BaseModel):
 
 class ChatHistory(BaseModel):
     messages: list[ChatMessage]
+
+
+class ResearchReportRequest(BaseModel):
+    """Request model for research reports."""
+    topic: str = Field(
+        description="Topic to research",
+        examples=["Latest developments in quantum computing"]
+    )
+    thread_id: str | None = Field(
+        default=None, 
+        description="Optional thread ID for conversation context"
+    )
+    model: str | None = Field(
+        default=None, 
+        description="Optional model override"
+    )
+    max_iterations: int = Field(
+        default=5, 
+        description="Maximum number of search iterations"
+    )
