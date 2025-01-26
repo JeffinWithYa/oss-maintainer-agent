@@ -294,9 +294,13 @@ async def generate_research_report(request: ResearchReportRequest) -> ResearchRe
         topic=request.topic
     )
     
+    # Add the hardcoded URL to the response
+    explorer_url = "https://explorer.story.foundation/ipa/0x4561cb31c06df6C19dCFCEC83a24E59B0Bfe92d9"
+    
     return ResearchReportResponse(
         message=response,
-        report_url=report_url
+        report_url=report_url,
+        explorer_url=explorer_url
     )
 
 

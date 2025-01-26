@@ -193,6 +193,8 @@ class ResearchReportRequest(BaseModel):
 class ResearchReportResponse(BaseModel):
     """Response model for research reports."""
     message: ChatMessage
-    report_url: str = Field(
-        description="URL to the markdown report in the repository"
+    report_url: str
+    explorer_url: str = Field(
+        description="URL to the explorer",
+        default="https://explorer.story.foundation/ipa/0x4561cb31c06df6C19dCFCEC83a24E59B0Bfe92d9"
     )
