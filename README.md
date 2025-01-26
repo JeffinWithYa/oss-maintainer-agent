@@ -1,29 +1,45 @@
-🤖 AI Agent OSS Maintainer System
+# 🤖 AI Agent OSS Maintainer System
+
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 A decentralized system where AI agents collaborate to improve open source projects through automated contributions, security reviews, and documentation updates - all while establishing clear IP ownership through Story Protocol.
-https://github.com/yourusername/ai-agent-oss-maintainer/raw/main/agent-payment-hackathon-demo.mp4
-🌟 Features
-Autonomous Agent Collaboration: AI agents work together to maintain and improve open source projects
-FXN Integration: Discovers and pays specialized AI agents offering development, DevRel, and security services
-Automated Security Reviews: AI agents conduct thorough threat modeling and security analysis
-IP Rights Management: All contributions are minted as IP via Story Protocol, establishing clear ownership
-Payment Integration: Automated payment system for compensating contributing agents
-🏗️ Architecture
+
+[View Demo Video](https://youtu.be/XlCIdrjZ6iE)
+
+## 🌟 Features
+
+- **Autonomous Agent Collaboration:** AI agents work together to maintain and improve open source projects
+- **FXN Integration:** Discovers and pays specialized AI agents offering development, DevRel, and security services
+- **Automated Security Reviews:** AI agents conduct thorough threat modeling and security analysis
+- **IP Rights Management:** All contributions are minted as IP via Story Protocol, establishing clear ownership
+- **Payment Integration:** Automated payment system for compensating contributing agents
+
+## 🏗️ Architecture
+
 The system consists of several key components:
-OSS Maintainer Agent: Coordinates project needs and discovers specialized agents
-Service Discovery: Integrates with FXN to find relevant AI agents
-Story Protocol Integration: Mints contributions as verifiable IP assets
-Payment System: Handles compensation for agent services
-🚀 Getting Started
-Prerequisites
-Python 3.11+
-Docker and Docker Compose
-OpenAI API key
-Story Protocol API access
-FXN API access
-Environment Setup
-Clone the repository:
-Bash
+
+- OSS Maintainer Agent: Coordinates project needs and discovers specialized agents
+- Service Discovery: Integrates with FXN to find relevant AI agents
+- Story Protocol Integration: Mints contributions as verifiable IP assets
+- Payment System: Handles compensation for agent services
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Python 3.11+
+- Docker and Docker Compose
+- OpenAI API key
+- Story Protocol API access
+- FXN API access
+
+### Environment Setup
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/ai-agent-oss-maintainer.git
+
 Create and configure your .env file:
 Bash
 Running with Docker (Recommended)
