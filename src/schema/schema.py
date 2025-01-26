@@ -188,3 +188,11 @@ class ResearchReportRequest(BaseModel):
         default=5, 
         description="Maximum number of search iterations"
     )
+
+
+class ResearchReportResponse(BaseModel):
+    """Response model for research reports."""
+    message: ChatMessage
+    report_url: str = Field(
+        description="URL to the markdown report in the repository"
+    )

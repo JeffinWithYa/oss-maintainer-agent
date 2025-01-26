@@ -28,12 +28,14 @@ from schema import (
     StreamInput,
     UserInput,
     ResearchReportRequest,
+    ResearchReportResponse,
 )
 from service.utils import (
     convert_message_content_to_string,
     langchain_to_chat_message,
     remove_tool_calls,
 )
+from service.github_utils import save_research_report
 
 warnings.filterwarnings("ignore", category=LangChainBetaWarning)
 logger = logging.getLogger(__name__)
@@ -265,14 +267,10 @@ def history(input: ChatHistoryInput) -> ChatHistory:
 
 
 @router.post("/research")
-async def generate_research_report(request: ResearchReportRequest) -> ChatMessage:
+async def generate_research_report(request: ResearchReportRequest) -> ResearchReportResponse:
     """
-    Generate a detailed research report on a given topic.
-    
-    This endpoint uses the research assistant agent with web search capabilities
-    to create a comprehensive report on the requested topic.
+    Generate a detailed research report and save it to GitHub.
     """
-    # Create a research-specific prompt
     research_prompt = (
         "Please create a detailed research report on the following topic. "
         "Use web searches to gather accurate and up-to-date information. "
@@ -280,7 +278,6 @@ async def generate_research_report(request: ResearchReportRequest) -> ChatMessag
         f"Topic: {request.topic}"
     )
     
-    # Convert to UserInput format
     user_input = UserInput(
         message=research_prompt,
         thread_id=request.thread_id,
@@ -288,8 +285,19 @@ async def generate_research_report(request: ResearchReportRequest) -> ChatMessag
         agent_config={"max_iterations": request.max_iterations}
     )
     
-    # Use the research assistant agent specifically
-    return await invoke(user_input, agent_id="research-assistant")
+    # Get the research response
+    response = await invoke(user_input, agent_id="research-assistant")
+    
+    # Save the report to GitHub
+    report_url = save_research_report(
+        content=response.content,
+        topic=request.topic
+    )
+    
+    return ResearchReportResponse(
+        message=response,
+        report_url=report_url
+    )
 
 
 @app.get("/health")
